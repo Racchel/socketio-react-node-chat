@@ -1,14 +1,18 @@
+import * as dotenv from 'dotenv'
 import express from "express";
 import cors from "cors";
 import chat from "./controllers/chat";
-require("dotenv").config();
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+dotenv.config()
 
 // app
 const app = express();
-const http = require("http").createServer(app);
+const httpServer = createServer(app);
 
 // socket io
-const io = require("socket.io")(http, {
+const io = new Server(httpServer, {
   path: "/socket.io",
   cors: {
     origin: [process.env.DOMAIN],
@@ -31,4 +35,4 @@ app.get("/api", (req, res) => {
 chat(io);
 
 const port = process.env.PORT || 8000;
-http.listen(port, () => console.log(`Server running on port ${port}`));
+httpServer.listen(port, () => console.log(`Server running on port ${port}`));
