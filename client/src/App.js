@@ -181,6 +181,7 @@ function App() {
   return (
     <div className="container-fluid">
       <Toaster />
+      <Header />
       
       {!connected && (
         <Login />
@@ -216,7 +217,7 @@ const Header = () => {
   return (
     <div className="row bg-primary text-center">
       <h1 className="fw-bold pt-2 text-light">
-        MERN-STACK REALTIME CHAT APP
+        SOCKET.IO CHAT APP
       </h1>
       <br />
       <p className="lead text-light">⚡ Public and private chat ⚡</p>
